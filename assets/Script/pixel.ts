@@ -1,10 +1,12 @@
-import { _decorator, Component, Node, Button, input, Input, EventMouse, Prefab, EventTouch, Vec2, Vec3 } from 'cc';
+import { _decorator, Component, Node, Button, input, Input, EventMouse, Prefab, EventTouch, Vec2, Vec3, Sprite } from 'cc';
 import { MainGame } from './MainGame';
 import { Map } from './Map';
 const { ccclass, property } = _decorator;
 
 @ccclass('eventPrefab')
 export  class eventPrefab extends Component {
+    @property(Sprite)
+    spawmflag : Sprite = null;
     
 
     pos : Vec2 = new Vec2();
@@ -17,7 +19,9 @@ export  class eventPrefab extends Component {
     
     
     
+    
     public static idselect : eventPrefab = null;
+    static eventPrefab: Sprite;
 
     
     onLoad(){
@@ -28,7 +32,7 @@ export  class eventPrefab extends Component {
     }
 
     start() {
-        
+        this.spawmflag.enabled = false;
 
         
         
@@ -51,13 +55,39 @@ export  class eventPrefab extends Component {
             MainGame.notice.lbX.enabled = true;
             MainGame.notice.lbY.enabled = true;
             MainGame.notice.block.enabled = true;
-            Map.notice1.setFlag.active = false;    
-            Map.notice1.setFlag.setParent(this.node);
+            // Map.notice1.setFlag.active = false;           
+            // Map.notice1.setFlag1.active = false;           
+            // Map.notice1.setFlag2.active = false;           
+            // Map.notice1.setFlag3.active = false;           
+            
+
+
+            Map.notice1.countflag = Map.notice1.countflag + 1;
+            if(Map.notice1.countflag === 1){
+                Map.notice1.setFlag.setParent(this.node);
+            }
+            else if(Map.notice1.countflag === 2){
+                Map.notice1.setFlag1.setParent(this.node);
+            }else if(Map.notice1.countflag === 3){
+                Map.notice1.setFlag2.setParent(this.node);
+            }else if(Map.notice1.countflag === 4){
+                Map.notice1.setFlag3.setParent(this.node);
+            }
+            if(Map.notice1.countflag >= 4){
+                Map.notice1.countflag = 0;
+            }
+            console.log(Map.notice1.countflag);
+
+
             MainGame.notice.lbY.string = this.setX.toString();
             let char1 = String.fromCharCode(this.setY);
             MainGame.notice.lbX.string = char1.toString();        
             Map.notice1.setFlagX =  this.idx;
             Map.notice1.setFlagY =  this.idy;
+            // this.spawmflag.enabled = true;
+            
+            
+
 
         }
     }

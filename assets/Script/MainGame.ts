@@ -71,6 +71,9 @@ export class MainGame extends Component {
         this.lbY.enabled = false;
         this.result.enabled = false;
         Map.notice1.setFlag.active = false;
+        Map.notice1.setFlag1.active = false;
+        Map.notice1.setFlag2.active = false;
+        Map.notice1.setFlag3.active = false;
         this.noderesult.active = false;
         this.block.enabled = false;
         
@@ -100,11 +103,30 @@ export class MainGame extends Component {
         this.lbX.enabled = false;
         this.lbY.enabled = false;
         Map.notice1.setFlag.active = false;
+        Map.notice1.setFlag1.active = false;           
+        Map.notice1.setFlag2.active = false;           
+        Map.notice1.setFlag3.active = false; 
         this.block.enabled = false;
+        Map.notice1.countflag = 0;
+        
     }
     onbtnCom(button: Button){
-        // this.setFlag.active = true;
-        Map.notice1.setFlag.active = true;
+        if(Map.notice1.countflag === 1){
+            Map.notice1.setFlag.active = true;
+        }else if(Map.notice1.countflag === 2){
+            Map.notice1.setFlag.active = true;
+            Map.notice1.setFlag1.active = true;
+        }else if(Map.notice1.countflag === 3){
+            Map.notice1.setFlag.active = true;
+            Map.notice1.setFlag1.active = true;
+            Map.notice1.setFlag2.active = true;
+        }else{
+            Map.notice1.setFlag.active = true;
+            Map.notice1.setFlag1.active = true;
+            Map.notice1.setFlag2.active = true;
+            Map.notice1.setFlag3.active = true;
+        }
+        
         this.note.enabled = false;
         this.exit.enabled = false;
         this.nodebtn1.active = false;
@@ -112,13 +134,16 @@ export class MainGame extends Component {
         this.lbX.enabled = false;
         this.lbY.enabled = false;
         Map.notice1.setFlag.setPosition(0,0);
+        // Map.notice1.setFlag1.setPosition(0,0);
         this.result.enabled = true;
         this.result.string = this.lbX.string + this.lbY.string;
         this.block.enabled = false;
+        // eventPrefab.idselect.spawmflag.enabled = true;
 
         
     }
     onbtnTest(button: Button){
+        this.block.enabled = true;
         this.resultY.string = (Math.floor(Math.random() * 34) + 1).toString();
         // this.resultY.string = '1';
         let setYrs = String.fromCharCode(this.getRNDInter());
@@ -137,6 +162,7 @@ export class MainGame extends Component {
 
     }
     onbtnExit2(button: Button){
+        this.block.enabled = false;
         this.noderesult.active = false;
     }
     getRNDInter(min = 65, max = 90){
@@ -145,11 +171,6 @@ export class MainGame extends Component {
     }
  
     
-
-
-
-    // cong viec tuan sau:
-    // tao mau cho cờ, click được nhiều cờ
     
 }
 
