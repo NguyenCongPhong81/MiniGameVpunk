@@ -8,7 +8,7 @@ export class MainGame extends Component {
     @property(Sprite)
     note : Sprite = null;
     @property(Sprite)
-    exit : Sprite =  null;
+    exitDialog : Sprite =  null;
     @property(Button)
     btn : Button = null;
     @property(Button)
@@ -29,6 +29,8 @@ export class MainGame extends Component {
     nodebtn2: Node = null;
     @property(Node)
     noderesult: Node = null;
+    @property(Node)
+    noticeDialog: Node = null;
     @property(Label)
     result : Label = null;
     @property(Label)
@@ -40,17 +42,48 @@ export class MainGame extends Component {
     @property(Label)
     lbRs : Label = null;
     @property(BlockInputEvents)
-    block: BlockInputEvents =  null;
+    blockScreen: BlockInputEvents =  null;
     
   
 
     testX : Number = 0;
     testY : Number = 0;
 
-    
+    gameStage: Number = 0; // 0: , 1: started, 2: gameover
+
+    aa = [
+        [0, 0, 1],
+        [0, 0, 2]
+    ];
 
     public static notice : MainGame = null;
     static MainGame: Sprite;
+
+    onDialogConfirm() {
+        if (this.gameStage !== 1) return;
+        // this.noticeDialog.active = true;
+        // this.note.enabled = true;                    
+        // this.exit.enabled = true;
+        // this.nodebtn1.active = true;
+        // this.nodebtn2.active = true;
+        // this.lbX.enabled = true;
+        // this.lbY.enabled = true;
+        // this.block.enabled = true;
+
+    }
+    offDialogConfirm(){
+        this.noticeDialog.active = false;
+    }
+    onSetFlag(){
+
+    }
+    offSetFlag(){
+        Map.notice1.setFlag.active = false;
+        Map.notice1.setFlag1.active = false;
+        Map.notice1.setFlag2.active = false;
+        Map.notice1.setFlag3.active = false;
+    }
+
 
     onLoad(){
         MainGame.notice = this;
@@ -62,20 +95,20 @@ export class MainGame extends Component {
 
     }
     start() {
+        this.noticeDialog.active = false;
         
-        this.note.enabled = false;
-        this.exit.enabled = false;
-        this.nodebtn1.active = false;
-        this.nodebtn2.active = false;
-        this.lbX.enabled = false;
-        this.lbY.enabled = false;
+        // this.note.enabled = false;
+        // this.exit.enabled = false;
+        // this.nodebtn1.active = false;
+        // this.nodebtn2.active = false;
+        // this.lbX.enabled = false;
+        // this.lbY.enabled = false;
         this.result.enabled = false;
-        Map.notice1.setFlag.active = false;
-        Map.notice1.setFlag1.active = false;
-        Map.notice1.setFlag2.active = false;
-        Map.notice1.setFlag3.active = false;
+        this.offSetFlag();
         this.noderesult.active = false;
-        this.block.enabled = false;
+        this.blockScreen.enabled = false;
+        this.gameStage = 1;
+        // Map.notice1.initMap(this.aa);
         
         
 
@@ -85,28 +118,38 @@ export class MainGame extends Component {
         
     }
     onClick(button: Button){
-        this.note.enabled = false;
-        this.exit.enabled = false;
-        this.nodebtn1.active = false;
-        this.nodebtn2.active = false;
-        this.lbX.enabled = false;
-        this.lbY.enabled = false;
-        Map.notice1.setFlag.active = false;
-        this.block.enabled = false;
+        this.noticeDialog.active = false;
+        this.offSetFlag();
+
+        // this.note.enabled = false;
+        // this.exitDialog.enabled = false;
+        // this.nodebtn1.active = false;
+        // this.nodebtn2.active = false;
+        // this.lbX.enabled = false;
+        // this.lbY.enabled = false;
+        // Map.notice1.setFlag.active = false;
+        // Map.notice1.setFlag1.active = false;           
+        // Map.notice1.setFlag2.active = false;           
+        // Map.notice1.setFlag3.active = false; 
+        this.blockScreen.enabled = false;
+        Map.notice1.countflag = 0;
+
 
     }
     onbtnExit(button: Button){
-        this.note.enabled = false;
-        this.exit.enabled = false;
-        this.nodebtn1.active = false;
-        this.nodebtn2.active = false;
-        this.lbX.enabled = false;
-        this.lbY.enabled = false;
-        Map.notice1.setFlag.active = false;
-        Map.notice1.setFlag1.active = false;           
-        Map.notice1.setFlag2.active = false;           
-        Map.notice1.setFlag3.active = false; 
-        this.block.enabled = false;
+        this.noticeDialog.active = false;
+        this.offSetFlag();
+        // this.note.enabled = false;
+        // this.exitDialog.enabled = false;
+        // this.nodebtn1.active = false;
+        // this.nodebtn2.active = false;
+        // this.lbX.enabled = false;
+        // this.lbY.enabled = false;
+        // Map.notice1.setFlag.active = false;
+        // Map.notice1.setFlag1.active = false;           
+        // Map.notice1.setFlag2.active = false;           
+        // Map.notice1.setFlag3.active = false; 
+        this.blockScreen.enabled = false;
         Map.notice1.countflag = 0;
         
     }
@@ -126,24 +169,25 @@ export class MainGame extends Component {
             Map.notice1.setFlag2.active = true;
             Map.notice1.setFlag3.active = true;
         }
+        this.noticeDialog.active = false;
         
-        this.note.enabled = false;
-        this.exit.enabled = false;
-        this.nodebtn1.active = false;
-        this.nodebtn2.active = false;
-        this.lbX.enabled = false;
-        this.lbY.enabled = false;
+        // this.note.enabled = false;
+        // this.exitDialog.enabled = false;
+        // this.nodebtn1.active = false;
+        // this.nodebtn2.active = false;
+        // this.lbX.enabled = false;
+        // this.lbY.enabled = false;
         Map.notice1.setFlag.setPosition(0,0);
-        // Map.notice1.setFlag1.setPosition(0,0);
         this.result.enabled = true;
         this.result.string = this.lbX.string + this.lbY.string;
-        this.block.enabled = false;
-        // eventPrefab.idselect.spawmflag.enabled = true;
+        this.blockScreen.enabled = false;
 
         
+        
     }
-    onbtnTest(button: Button){
-        this.block.enabled = true;
+    onbtnTest(button: Button) {
+        this.gameStage = 2;
+        this.blockScreen.enabled = true;
         this.resultY.string = (Math.floor(Math.random() * 34) + 1).toString();
         // this.resultY.string = '1';
         let setYrs = String.fromCharCode(this.getRNDInter());
@@ -154,18 +198,18 @@ export class MainGame extends Component {
             this.lbRs.string = 'You Win !';
         }
         else{
-            this.lbRs.string = 'You Lost !'
+            this.lbRs.string = 'You Lost !';
         }
         
         
 
 
     }
-    onbtnExit2(button: Button){
-        this.block.enabled = false;
+    onbtnExit2(button: Button) {
         this.noderesult.active = false;
+        this.blockScreen.enabled = false;
     }
-    getRNDInter(min = 65, max = 90){
+    getRNDInter(min = 65, max = 90) {
         return Math.floor(Math.random()* (max - min + 1)) + min;
         
     }

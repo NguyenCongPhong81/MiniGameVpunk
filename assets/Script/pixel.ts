@@ -33,9 +33,12 @@ export  class eventPrefab extends Component {
 
     start() {
         this.spawmflag.enabled = false;
+        
+        
+    }
 
-        
-        
+    setFlag(flag: number) {
+        // set frame cho spawmflag
     }
 
     update(deltaTime: number) {
@@ -47,14 +50,18 @@ export  class eventPrefab extends Component {
     }
     onTouchEnd(event: EventTouch){
         const location1 = event.getLocation();
-        if((location1.x - this.pos.x ) < 10 && (location1.x - this.pos.x) > -10 && (location1.y - this.pos.y ) < 10 && (location1.y - this.pos.y) > -10 ){         
-            MainGame.notice.note.enabled = true;                    
-            MainGame.notice.exit.enabled = true;
-            MainGame.notice.nodebtn1.active = true;
-            MainGame.notice.nodebtn2.active = true;
-            MainGame.notice.lbX.enabled = true;
-            MainGame.notice.lbY.enabled = true;
-            MainGame.notice.block.enabled = true;
+        if((location1.x - this.pos.x ) < 10 && (location1.x - this.pos.x) > -10 && (location1.y - this.pos.y ) < 10 && (location1.y - this.pos.y) > -10 ){      
+            // MainGame.notice.onDialogConfirm();
+            MainGame.notice.blockScreen.enabled = true;
+            MainGame.notice.noticeDialog.active = true;
+
+            // MainGame.notice.note.enabled = true;                    
+            // MainGame.notice.exitDialog.enabled = true;
+            // MainGame.notice.nodebtn1.active = true;
+            // MainGame.notice.nodebtn2.active = true;
+            // MainGame.notice.lbX.enabled = true;
+            // MainGame.notice.lbY.enabled = true;
+            
             // Map.notice1.setFlag.active = false;           
             // Map.notice1.setFlag1.active = false;           
             // Map.notice1.setFlag2.active = false;           
@@ -76,6 +83,7 @@ export  class eventPrefab extends Component {
             if(Map.notice1.countflag >= 4){
                 Map.notice1.countflag = 0;
             }
+            
             console.log(Map.notice1.countflag);
 
 
@@ -86,7 +94,9 @@ export  class eventPrefab extends Component {
             Map.notice1.setFlagY =  this.idy;
             // this.spawmflag.enabled = true;
             
-            
+            // set frame (1 -> 4)
+            // const id = Math.floor(Math.random() * 4) + 1;
+            // this.setFlag(id);
 
 
         }

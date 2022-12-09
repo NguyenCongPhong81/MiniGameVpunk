@@ -7,7 +7,7 @@ const { ccclass, property } = _decorator;
 export class Map extends Component {
     
     @property(Prefab)
-    map : Prefab = null;
+    block : Prefab = null;
     @property(Node)
     setFlag : Node = null;
     @property(Node)
@@ -31,9 +31,21 @@ export class Map extends Component {
     mapH : Number = 2340 + 145 ;
     mapW: Number = 3060 - 490 ;
 
-    onLoad(){
+    aa = [];
+
+    onLoad() {
         Map.notice1 = this;
     }
+
+    // initMap(_aa) {
+    //     for(let i = 0; i < _aa.length; i++) {
+    //         for(let j = 0; j < _aa[i].length; j++) {
+    //             if (_aa[i][j] > 0 && this.aa[i] && this.aa[i][j]) {
+    //                 this.aa[i][j].getComponent(eventPrefab).setFlag(_aa[i][j]);
+    //             }
+    //         }
+    //     }
+    // }
 
     start() {   
 
@@ -44,14 +56,15 @@ export class Map extends Component {
         for(let i = -490; i < this.mapW ; i+=90){
             setx++;
             let sety = 64;
+            this.aa.push([]);
             // let scene = director.getScene().getChildByName("Canvas");
             for(let j = 145; j < this.mapH; j+= 90){
-                let node = instantiate(this.map);
+                let node = instantiate(this.block);
                 node.parent = this.node.parent;
                 this.setFlag.setParent(node);             
                 this.setFlag1.setParent(node);           
-                // this.setFlag2.setParent(node);             
-                // this.setFlag3.setParent(node);             
+                this.setFlag2.setParent(node);             
+                this.setFlag3.setParent(node);             
                 node.setPosition(i,-j); 
                 id1++;
                 sety++;
@@ -60,7 +73,8 @@ export class Map extends Component {
                 Pixel.idx = i;
                 Pixel.idy = -j;
                 Pixel.setX = setx;
-                Pixel.setY = sety;                                                                                   
+                Pixel.setY = sety;
+                // this.aa[i].push(node);                                                                   
             }
             
            
