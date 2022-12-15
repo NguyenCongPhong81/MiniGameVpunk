@@ -61,6 +61,7 @@ export class MainGame extends Component {
 
     onDialogConfirm() {
         if (this.gameStage !== 1) return;
+        this.noticeDialog.active = true;
         // this.noticeDialog.active = true;
         // this.note.enabled = true;                    
         // this.exit.enabled = true;
@@ -96,6 +97,7 @@ export class MainGame extends Component {
     }
     start() {
         this.noticeDialog.active = false;
+
         
         // this.note.enabled = false;
         // this.exit.enabled = false;
@@ -151,9 +153,14 @@ export class MainGame extends Component {
         // Map.notice1.setFlag3.active = false; 
         this.blockScreen.enabled = false;
         Map.notice1.countflag = 0;
+        eventPrefab.idselect.spawmflag.enabled = false;
+
         
     }
     onbtnCom(button: Button){
+        // eventPrefab.idselect.spawmflag.enabled = true;
+        
+
         if(Map.notice1.countflag === 1){
             Map.notice1.setFlag.active = true;
         }else if(Map.notice1.countflag === 2){
@@ -210,7 +217,7 @@ export class MainGame extends Component {
         this.blockScreen.enabled = false;
     }
     getRNDInter(min = 65, max = 90) {
-        return Math.floor(Math.random()* (max - min + 1)) + min;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
         
     }
  

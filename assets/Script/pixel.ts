@@ -38,9 +38,13 @@ export  class eventPrefab extends Component {
     }
 
     setFlag(flag: number) {
+        
         // set frame cho spawmflag
-    }
 
+        
+
+    }
+    
     update(deltaTime: number) {
         
     }
@@ -54,6 +58,8 @@ export  class eventPrefab extends Component {
             // MainGame.notice.onDialogConfirm();
             MainGame.notice.blockScreen.enabled = true;
             MainGame.notice.noticeDialog.active = true;
+            
+            
 
             // MainGame.notice.note.enabled = true;                    
             // MainGame.notice.exitDialog.enabled = true;
@@ -84,7 +90,7 @@ export  class eventPrefab extends Component {
                 Map.notice1.countflag = 0;
             }
             
-            console.log(Map.notice1.countflag);
+            // console.log(Map.notice1.countflag);
 
 
             MainGame.notice.lbY.string = this.setX.toString();
@@ -97,7 +103,7 @@ export  class eventPrefab extends Component {
             // set frame (1 -> 4)
             // const id = Math.floor(Math.random() * 4) + 1;
             // this.setFlag(id);
-
+            // console.log(Map.notice1.aa);
 
         }
     }

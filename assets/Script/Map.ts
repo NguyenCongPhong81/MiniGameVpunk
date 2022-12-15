@@ -37,15 +37,15 @@ export class Map extends Component {
         Map.notice1 = this;
     }
 
-    // initMap(_aa) {
-    //     for(let i = 0; i < _aa.length; i++) {
-    //         for(let j = 0; j < _aa[i].length; j++) {
-    //             if (_aa[i][j] > 0 && this.aa[i] && this.aa[i][j]) {
-    //                 this.aa[i][j].getComponent(eventPrefab).setFlag(_aa[i][j]);
-    //             }
-    //         }
-    //     }
-    // }
+    initMap(_aa) {
+        for(let i = 0; i < _aa.length; i++) {
+            for(let j = 0; j < _aa[i].length; j++) {
+                if (_aa[i][j] > 0 && this.aa[i] && this.aa[i][j]) {
+                    this.aa[i][j].getComponent(eventPrefab).setFlag(_aa[i][j]);
+                }
+            }
+        }
+    }
 
     start() {   
 
@@ -61,10 +61,10 @@ export class Map extends Component {
             for(let j = 145; j < this.mapH; j+= 90){
                 let node = instantiate(this.block);
                 node.parent = this.node.parent;
-                this.setFlag.setParent(node);             
-                this.setFlag1.setParent(node);           
-                this.setFlag2.setParent(node);             
-                this.setFlag3.setParent(node);             
+                // this.setFlag.setParent(node);             
+                // this.setFlag1.setParent(node);           
+                // this.setFlag2.setParent(node);             
+                // this.setFlag3.setParent(node);             
                 node.setPosition(i,-j); 
                 id1++;
                 sety++;
@@ -74,6 +74,7 @@ export class Map extends Component {
                 Pixel.idy = -j;
                 Pixel.setX = setx;
                 Pixel.setY = sety;
+            
                 // this.aa[i].push(node);                                                                   
             }
             

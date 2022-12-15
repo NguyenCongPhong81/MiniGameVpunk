@@ -3198,7 +3198,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "NoticeDialog",
+    "_name": "noticeDialog",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
