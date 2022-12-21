@@ -1,12 +1,10 @@
-import { _decorator, Component, Node, Button, input, Input, EventMouse, Prefab, EventTouch, Vec2, Vec3, Sprite } from 'cc';
+import { _decorator, Component, Node, Button, input, Input, EventMouse, Prefab, EventTouch, Vec2, Vec3, Sprite, instantiate } from 'cc';
 import { MainGame } from './MainGame';
 import { Map } from './Map';
 const { ccclass, property } = _decorator;
 
 @ccclass('eventPrefab')
 export  class eventPrefab extends Component {
-    @property(Sprite)
-    spawmflag : Sprite = null;
     
 
     pos : Vec2 = new Vec2();
@@ -32,7 +30,7 @@ export  class eventPrefab extends Component {
     }
 
     start() {
-        this.spawmflag.enabled = false;
+        // this.spawmflag.enabled = false;
         
         
     }
@@ -44,9 +42,15 @@ export  class eventPrefab extends Component {
         
 
     }
+    setFlag2() {
+        // this.spawmflag.enabled = flag;
+        // let node = instantiate(Map.notice1.spawmflag);
+        // node.parent = this.node.parent;
+        // node.setPosition(this.idx, this.idy);
+    }
     
     update(deltaTime: number) {
-        
+    
     }
     onTouchStart(event: EventTouch){
         const location = event.getStartLocation();
@@ -56,8 +60,17 @@ export  class eventPrefab extends Component {
         const location1 = event.getLocation();
         if((location1.x - this.pos.x ) < 10 && (location1.x - this.pos.x) > -10 && (location1.y - this.pos.y ) < 10 && (location1.y - this.pos.y) > -10 ){      
             // MainGame.notice.onDialogConfirm();
+            // let node = instantiate(Map.notice1.spawmflag);
+            // node.parent = this.node.parent;
+            // node.setPosition(this.idx, this.idy);
+
+
+            // Map.notice1.setFlag.setParent(this.node);
+            MainGame.notice.gameStage = 1;
             MainGame.notice.blockScreen.enabled = true;
             MainGame.notice.noticeDialog.active = true;
+            // this.spawmflag.enabled = true;
+
             
             
 
@@ -75,20 +88,19 @@ export  class eventPrefab extends Component {
             
 
 
-            Map.notice1.countflag = Map.notice1.countflag + 1;
-            if(Map.notice1.countflag === 1){
-                Map.notice1.setFlag.setParent(this.node);
-            }
-            else if(Map.notice1.countflag === 2){
-                Map.notice1.setFlag1.setParent(this.node);
-            }else if(Map.notice1.countflag === 3){
-                Map.notice1.setFlag2.setParent(this.node);
-            }else if(Map.notice1.countflag === 4){
-                Map.notice1.setFlag3.setParent(this.node);
-            }
-            if(Map.notice1.countflag >= 4){
-                Map.notice1.countflag = 0;
-            }
+            // if(Map.notice1.countflag === 1){
+            //     Map.notice1.setFlag.setParent(this.node);
+            // }
+            // else if(Map.notice1.countflag === 2){
+            //     Map.notice1.setFlag1.setParent(this.node);
+            // }else if(Map.notice1.countflag === 3){
+            //     Map.notice1.setFlag2.setParent(this.node);
+            // }else if(Map.notice1.countflag === 4){
+            //     Map.notice1.setFlag3.setParent(this.node);
+            // }
+            // if(Map.notice1.countflag >= 4){
+            //     Map.notice1.countflag = 0;
+            // }
             
             // console.log(Map.notice1.countflag);
 
@@ -101,8 +113,8 @@ export  class eventPrefab extends Component {
             // this.spawmflag.enabled = true;
             
             // set frame (1 -> 4)
-            // const id = Math.floor(Math.random() * 4) + 1;
-            // this.setFlag(id);
+            const id = Math.floor(Math.random() * 4) + 1;
+            this.setFlag(id);
             // console.log(Map.notice1.aa);
 
         }

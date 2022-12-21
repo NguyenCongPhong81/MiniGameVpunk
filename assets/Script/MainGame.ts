@@ -1,10 +1,11 @@
-import { _decorator, Component, Node, Sprite, Button, Label, Vec3, Vec2, log, BlockInputEvents } from 'cc';
+import { _decorator, Component, Node, Sprite, Button, Label, Vec3, Vec2, log, BlockInputEvents, instantiate, Prefab } from 'cc';
 const { ccclass, property } = _decorator;
 import { eventPrefab } from './pixel';
 import { Map } from './Map';
 
 @ccclass('MainGame')
 export class MainGame extends Component {
+    
     @property(Sprite)
     note : Sprite = null;
     @property(Sprite)
@@ -110,7 +111,7 @@ export class MainGame extends Component {
         this.noderesult.active = false;
         this.blockScreen.enabled = false;
         this.gameStage = 1;
-        // Map.notice1.initMap(this.aa);
+        Map.notice1.initMap(this.aa);
         
         
 
@@ -135,6 +136,8 @@ export class MainGame extends Component {
         // Map.notice1.setFlag3.active = false; 
         this.blockScreen.enabled = false;
         Map.notice1.countflag = 0;
+        // eventPrefab.idselect.spawmflag.enabled = false;
+
 
 
     }
@@ -153,29 +156,44 @@ export class MainGame extends Component {
         // Map.notice1.setFlag3.active = false; 
         this.blockScreen.enabled = false;
         Map.notice1.countflag = 0;
-        eventPrefab.idselect.spawmflag.enabled = false;
+        // eventPrefab.idselect.spawmflag.enabled = false;
 
         
     }
     onbtnCom(button: Button){
-        // eventPrefab.idselect.spawmflag.enabled = true;
+        // console.log("eventPrefab----", Map.notice1.aa);
+
+
+        let node = instantiate(Map.notice1.spawmflag);
+        node.parent = this.node.parent;
+        node.setPosition(eventPrefab.idselect.idx, eventPrefab.idselect.idy);
+
+
+        // eventPrefab.idselect.setFlag2();      
+    
+        // Map.notice1.aa[0][0].spawmflag.enabled = true;
+        Map.notice1.countflag = Map.notice1.countflag + 1;
+        
+        Map.notice1.setFlag.active = true;
+        console.log(Map.notice1.countflag);
+        
         
 
-        if(Map.notice1.countflag === 1){
-            Map.notice1.setFlag.active = true;
-        }else if(Map.notice1.countflag === 2){
-            Map.notice1.setFlag.active = true;
-            Map.notice1.setFlag1.active = true;
-        }else if(Map.notice1.countflag === 3){
-            Map.notice1.setFlag.active = true;
-            Map.notice1.setFlag1.active = true;
-            Map.notice1.setFlag2.active = true;
-        }else{
-            Map.notice1.setFlag.active = true;
-            Map.notice1.setFlag1.active = true;
-            Map.notice1.setFlag2.active = true;
-            Map.notice1.setFlag3.active = true;
-        }
+        // if(Map.notice1.countflag === 1){
+        //     Map.notice1.setFlag.active = true;
+        // }else if(Map.notice1.countflag === 2){
+        //     Map.notice1.setFlag.active = true;
+        //     Map.notice1.setFlag1.active = true;
+        // }else if(Map.notice1.countflag === 3){
+        //     Map.notice1.setFlag.active = true;
+        //     Map.notice1.setFlag1.active = true;
+        //     Map.notice1.setFlag2.active = true;
+        // }else{
+        //     Map.notice1.setFlag.active = true;
+        //     Map.notice1.setFlag1.active = true;
+        //     Map.notice1.setFlag2.active = true;
+        //     Map.notice1.setFlag3.active = true;
+        // }
         this.noticeDialog.active = false;
         
         // this.note.enabled = false;

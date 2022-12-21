@@ -8,6 +8,8 @@ export class Map extends Component {
     
     @property(Prefab)
     block : Prefab = null;
+    @property(Prefab)
+    spawmflag : Prefab = null;
     @property(Node)
     setFlag : Node = null;
     @property(Node)
@@ -51,8 +53,9 @@ export class Map extends Component {
 
         let id1 = -1;
         let setx = 0;
+        MainGame.notice.gameStage = 0;
         
-        
+        let ix = 0;
         for(let i = -490; i < this.mapW ; i+=90){
             setx++;
             let sety = 64;
@@ -61,7 +64,7 @@ export class Map extends Component {
             for(let j = 145; j < this.mapH; j+= 90){
                 let node = instantiate(this.block);
                 node.parent = this.node.parent;
-                // this.setFlag.setParent(node);             
+                this.setFlag.setParent(node);             
                 // this.setFlag1.setParent(node);           
                 // this.setFlag2.setParent(node);             
                 // this.setFlag3.setParent(node);             
@@ -74,9 +77,11 @@ export class Map extends Component {
                 Pixel.idy = -j;
                 Pixel.setX = setx;
                 Pixel.setY = sety;
-            
-                // this.aa[i].push(node);                                                                   
+                
+                this.aa[ix].push(node);
+                // console.log(this.aa);                                                                   
             }
+            ix ++;
             
            
         }

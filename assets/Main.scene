@@ -1233,6 +1233,10 @@
       "__uuid__": "f3acdb6e-631c-47a1-b69e-c1096cb1191a",
       "__expectedType__": "cc.Prefab"
     },
+    "spawmflag": {
+      "__uuid__": "6e1e61b6-1b16-471f-8d53-5b85f6e5c5a0",
+      "__expectedType__": "cc.Prefab"
+    },
     "setFlag": {
       "__id__": 21
     },
