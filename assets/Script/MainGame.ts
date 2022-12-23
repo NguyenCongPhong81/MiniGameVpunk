@@ -156,6 +156,8 @@ export class MainGame extends Component {
         // Map.notice1.setFlag3.active = false; 
         this.blockScreen.enabled = false;
         Map.notice1.countflag = 0;
+        eventPrefab.idselect.setFlag2(false);      
+
         // eventPrefab.idselect.spawmflag.enabled = false;
 
         
@@ -164,17 +166,17 @@ export class MainGame extends Component {
         // console.log("eventPrefab----", Map.notice1.aa);
 
 
-        let node = instantiate(Map.notice1.spawmflag);
-        node.parent = this.node.parent;
-        node.setPosition(eventPrefab.idselect.idx, eventPrefab.idselect.idy);
+        // let node = instantiate(Map.notice1.spawmflag);
+        // node.parent = this.node.parent;
+        // eventPrefab.idselect.node.setPosition(0,0);
 
 
-        // eventPrefab.idselect.setFlag2();      
+        eventPrefab.idselect.setFlag2(true);      
     
         // Map.notice1.aa[0][0].spawmflag.enabled = true;
         Map.notice1.countflag = Map.notice1.countflag + 1;
         
-        Map.notice1.setFlag.active = true;
+        // Map.notice1.setFlag.active = true;
         console.log(Map.notice1.countflag);
         
         

@@ -33,7 +33,10 @@ export class Map extends Component {
     mapH : Number = 2340 + 145 ;
     mapW: Number = 3060 - 490 ;
 
-    aa = [];
+    aa = [
+        // [1, 1, 1],
+        // [1, 1, 1],
+    ]; // 25 c, 34 h
 
     onLoad() {
         Map.notice1 = this;
@@ -79,7 +82,7 @@ export class Map extends Component {
                 Pixel.setY = sety;
                 
                 this.aa[ix].push(node);
-                // console.log(this.aa);                                                                   
+                console.log("xy", id1, setx, sety);                                                                   
             }
             ix ++;
             
@@ -90,6 +93,12 @@ export class Map extends Component {
 
     update(deltaTime: number) {
         
+    }
+    setFlagA(x: number, y: number) {
+        console.log("setFlagA", x, y);
+        let node = instantiate(this.spawmflag);
+        node.setPosition(x, y);
+        node.parent = this.node.parent;
     }
     
     

@@ -42,11 +42,12 @@ export  class eventPrefab extends Component {
         
 
     }
-    setFlag2() {
+    setFlag2(flag: boolean) {
         // this.spawmflag.enabled = flag;
-        // let node = instantiate(Map.notice1.spawmflag);
-        // node.parent = this.node.parent;
-        // node.setPosition(this.idx, this.idy);
+        let node = instantiate(Map.notice1.spawmflag);
+        node.parent = this.node.parent;
+        node.setPosition(this.idx, this.idy);
+        node.active = flag;
     }
     
     update(deltaTime: number) {
@@ -60,12 +61,14 @@ export  class eventPrefab extends Component {
         const location1 = event.getLocation();
         if((location1.x - this.pos.x ) < 10 && (location1.x - this.pos.x) > -10 && (location1.y - this.pos.y ) < 10 && (location1.y - this.pos.y) > -10 ){      
             // MainGame.notice.onDialogConfirm();
+            // this.setFlag2(true);
             // let node = instantiate(Map.notice1.spawmflag);
             // node.parent = this.node.parent;
             // node.setPosition(this.idx, this.idy);
 
-
+            Map.notice1.setFlagA(this.node.getPosition().x, this.node.getPosition().y);
             // Map.notice1.setFlag.setParent(this.node);
+            // Map.notice1.spawmflag.setParent(this.node);
             MainGame.notice.gameStage = 1;
             MainGame.notice.blockScreen.enabled = true;
             MainGame.notice.noticeDialog.active = true;
