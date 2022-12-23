@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Sprite, Button, Label, Vec3, Vec2, log, BlockInputEvents, instantiate, Prefab } from 'cc';
+import { _decorator, Component, Node, Sprite, Button, Label, Vec3, Vec2, log, BlockInputEvents, instantiate, Prefab, sys } from 'cc';
 const { ccclass, property } = _decorator;
 import { eventPrefab } from './pixel';
 import { Map } from './Map';
@@ -49,6 +49,7 @@ export class MainGame extends Component {
 
     testX : Number = 0;
     testY : Number = 0;
+    count : number = 0;
 
     gameStage: Number = 0; // 0: , 1: started, 2: gameover
 
@@ -56,6 +57,7 @@ export class MainGame extends Component {
         [0, 0, 1],
         [0, 0, 2]
     ];
+    alist = {};
 
     public static notice : MainGame = null;
     static MainGame: Sprite;
@@ -98,6 +100,8 @@ export class MainGame extends Component {
     }
     start() {
         this.noticeDialog.active = false;
+        this.loadData();
+        console.log("ax", Map.notice1.ax);
 
         
         // this.note.enabled = false;
@@ -213,20 +217,21 @@ export class MainGame extends Component {
         
     }
     onbtnTest(button: Button) {
-        this.gameStage = 2;
-        this.blockScreen.enabled = true;
-        this.resultY.string = (Math.floor(Math.random() * 34) + 1).toString();
-        // this.resultY.string = '1';
-        let setYrs = String.fromCharCode(this.getRNDInter());
-        this.resultX.string = setYrs.toString();
-        // this.resultX.string = 'A';
-        this.noderesult.active = true;
-        if(this.lbX.string === this.resultX.string && this.lbY.string === this.resultY.string){
-            this.lbRs.string = 'You Win !';
-        }
-        else{
-            this.lbRs.string = 'You Lost !';
-        }
+        // this.gameStage = 2;
+        // this.blockScreen.enabled = true;
+        // this.resultY.string = (Math.floor(Math.random() * 34) + 1).toString();
+        // // this.resultY.string = '1';
+        // let setYrs = String.fromCharCode(this.getRNDInter());
+        // this.resultX.string = setYrs.toString();
+        // // this.resultX.string = 'A';
+        // this.noderesult.active = true;
+        // if(this.lbX.string === this.resultX.string && this.lbY.string === this.resultY.string){
+        //     this.lbRs.string = 'You Win !';
+        // }
+        // else{
+        //     this.lbRs.string = 'You Lost !';
+        // }
+        sys.localStorage.clear();
         
         
 
@@ -239,6 +244,20 @@ export class MainGame extends Component {
     getRNDInter(min = 65, max = 90) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
         
+    }
+    saveData(){
+       
+        for(let i = 0; i < Map.notice1.ax.length; i++){
+            sys.localStorage.setItem('dataUser'+ i, Map.notice1.ax[i]);
+        }
+        sys.localStorage.setItem('count', Map.notice1.ax.length.toString());
+    }
+    loadData(){
+        this.count = parseInt(sys.localStorage.getItem('count'));
+        for(let i =0; i< this.count; i++){
+            let blocknumber = parseInt(sys.localStorage.getItem('dataUser'+ i));
+            Map.notice1.ax.push(blocknumber);
+        }
     }
  
     

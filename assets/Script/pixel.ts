@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Button, input, Input, EventMouse, Prefab, EventTouch, Vec2, Vec3, Sprite, instantiate } from 'cc';
+import { _decorator, Component, Node, Button, input, Input, EventMouse, Prefab, EventTouch, Vec2, Vec3, Sprite, instantiate, sys } from 'cc';
 import { MainGame } from './MainGame';
 import { Map } from './Map';
 const { ccclass, property } = _decorator;
@@ -14,6 +14,8 @@ export  class eventPrefab extends Component {
     type : Number = 0;
     setX : number = 0;
     setY : number = 0;
+
+    
     
     
     
@@ -31,6 +33,7 @@ export  class eventPrefab extends Component {
 
     start() {
         // this.spawmflag.enabled = false;
+        // console.log(sys.localStorage.getItem('dataUser'));
         
         
     }
@@ -50,6 +53,8 @@ export  class eventPrefab extends Component {
         node.active = flag;
     }
     
+
+    
     update(deltaTime: number) {
     
     }
@@ -59,13 +64,18 @@ export  class eventPrefab extends Component {
     }
     onTouchEnd(event: EventTouch){
         const location1 = event.getLocation();
+        Map.notice1.ax.push(this.id);
+        MainGame.notice.saveData();
+       
+        
+        
         if((location1.x - this.pos.x ) < 10 && (location1.x - this.pos.x) > -10 && (location1.y - this.pos.y ) < 10 && (location1.y - this.pos.y) > -10 ){      
             // MainGame.notice.onDialogConfirm();
             // this.setFlag2(true);
             // let node = instantiate(Map.notice1.spawmflag);
             // node.parent = this.node.parent;
             // node.setPosition(this.idx, this.idy);
-
+            
             Map.notice1.setFlagA(this.node.getPosition().x, this.node.getPosition().y);
             // Map.notice1.setFlag.setParent(this.node);
             // Map.notice1.spawmflag.setParent(this.node);
@@ -73,7 +83,7 @@ export  class eventPrefab extends Component {
             MainGame.notice.blockScreen.enabled = true;
             MainGame.notice.noticeDialog.active = true;
             // this.spawmflag.enabled = true;
-
+            
             
             
 

@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Prefab, instantiate, director, Button, Input, input, EventMouse, Sprite } from 'cc';
+import { _decorator, Component, Node, Prefab, instantiate, director, Button, Input, input, EventMouse, Sprite, sys } from 'cc';
 import { MainGame } from './MainGame';
 import { eventPrefab } from './pixel';
 const { ccclass, property } = _decorator;
@@ -33,6 +33,8 @@ export class Map extends Component {
     mapH : Number = 2340 + 145 ;
     mapW: Number = 3060 - 490 ;
 
+    ax = [];
+
     aa = [
         // [1, 1, 1],
         // [1, 1, 1],
@@ -56,6 +58,14 @@ export class Map extends Component {
 
         let id1 = -1;
         let setx = 0;
+        // console.log(sys.localStorage.getItem('dataUser'));
+
+        
+       
+        
+
+
+
         MainGame.notice.gameStage = 0;
         
         let ix = 0;
@@ -82,12 +92,23 @@ export class Map extends Component {
                 Pixel.setY = sety;
                 
                 this.aa[ix].push(node);
-                console.log("xy", id1, setx, sety);                                                                   
+                // console.log(id1);
+                // console.log("xy", id1, setx, sety);
+                for(let i = 0; i < Map.notice1.ax.length; i++){
+                    if(Map.notice1.ax[i] === id1){
+                       this.setFlagA(eventPrefab.idselect.idx,eventPrefab.idselect.idy);
+                    }
+                }                                                                   
             }
             ix ++;
+
             
            
         }
+        
+       
+        
+       
    
     }
 
@@ -95,10 +116,11 @@ export class Map extends Component {
         
     }
     setFlagA(x: number, y: number) {
-        console.log("setFlagA", x, y);
+        // console.log("setFlagA", x, y);
         let node = instantiate(this.spawmflag);
         node.setPosition(x, y);
         node.parent = this.node.parent;
+
     }
     
     
