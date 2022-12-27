@@ -15,6 +15,9 @@ export  class eventPrefab extends Component {
     setX : number = 0;
     setY : number = 0;
 
+    setFlagX: number = 0;
+    setFlagY: number = 0;
+
     
     
     
@@ -75,8 +78,9 @@ export  class eventPrefab extends Component {
             // let node = instantiate(Map.notice1.spawmflag);
             // node.parent = this.node.parent;
             // node.setPosition(this.idx, this.idy);
-            
-            Map.notice1.setFlagA(this.node.getPosition().x, this.node.getPosition().y);
+            this.setFlagX = this.node.getPosition().x;
+            this.setFlagY = this.node.getPosition().y;
+            // Map.notice1.setFlagA(this.node.getPosition().x, this.node.getPosition().y);
             // Map.notice1.setFlag.setParent(this.node);
             // Map.notice1.spawmflag.setParent(this.node);
             MainGame.notice.gameStage = 1;

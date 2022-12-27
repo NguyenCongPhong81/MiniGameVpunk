@@ -18,6 +18,7 @@ export class Map extends Component {
     setFlag2 : Node = null;
     @property(Node)
     setFlag3 : Node = null;
+    
 
     public static notice1: Map = null;
     
@@ -119,7 +120,7 @@ export class Map extends Component {
         // console.log("setFlagA", x, y);
         let node = instantiate(this.spawmflag);
         node.setPosition(x, y);
-        node.parent = this.node.parent;
+        node.parent = this.node.parent; 
 
     }
     

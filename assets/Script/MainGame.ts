@@ -174,8 +174,9 @@ export class MainGame extends Component {
         // node.parent = this.node.parent;
         // eventPrefab.idselect.node.setPosition(0,0);
 
+        Map.notice1.setFlagA(Map.notice1.setFlagX,Map.notice1.setFlagY);
 
-        eventPrefab.idselect.setFlag2(true);      
+        // eventPrefab.idselect.setFlag2(true);      
     
         // Map.notice1.aa[0][0].spawmflag.enabled = true;
         Map.notice1.countflag = Map.notice1.countflag + 1;
@@ -217,20 +218,20 @@ export class MainGame extends Component {
         
     }
     onbtnTest(button: Button) {
-        // this.gameStage = 2;
-        // this.blockScreen.enabled = true;
-        // this.resultY.string = (Math.floor(Math.random() * 34) + 1).toString();
-        // // this.resultY.string = '1';
-        // let setYrs = String.fromCharCode(this.getRNDInter());
-        // this.resultX.string = setYrs.toString();
-        // // this.resultX.string = 'A';
-        // this.noderesult.active = true;
-        // if(this.lbX.string === this.resultX.string && this.lbY.string === this.resultY.string){
-        //     this.lbRs.string = 'You Win !';
-        // }
-        // else{
-        //     this.lbRs.string = 'You Lost !';
-        // }
+        this.gameStage = 2;
+        this.blockScreen.enabled = true;
+        this.resultY.string = (Math.floor(Math.random() * 34) + 1).toString();
+        // this.resultY.string = '1';
+        let setYrs = String.fromCharCode(this.getRNDInter());
+        this.resultX.string = setYrs.toString();
+        // this.resultX.string = 'A';
+        this.noderesult.active = true;
+        if(this.lbX.string === this.resultX.string && this.lbY.string === this.resultY.string){
+            this.lbRs.string = 'You Win !';
+        }
+        else{
+            this.lbRs.string = 'You Lost !';
+        }
         sys.localStorage.clear();
         
         
@@ -246,18 +247,27 @@ export class MainGame extends Component {
         
     }
     saveData(){
-       
-        for(let i = 0; i < Map.notice1.ax.length; i++){
+        const text = Map.notice1.ax.toString();
+        sys.localStorage.setItem('dataUser', text);
+        /* for(let i = 0; i < Map.notice1.ax.length; i++){
             sys.localStorage.setItem('dataUser'+ i, Map.notice1.ax[i]);
         }
-        sys.localStorage.setItem('count', Map.notice1.ax.length.toString());
+        sys.localStorage.setItem('count', Map.notice1.ax.length.toString()); */
     }
     loadData(){
-        this.count = parseInt(sys.localStorage.getItem('count'));
+        const text = sys.localStorage.getItem('dataUser');
+        if (text) {
+            const arr = text.split(",");
+            console.log("arr---", arr);
+            for(let i =0; i< arr.length; i++) {
+                Map.notice1.ax.push(parseInt(arr[i]));
+            }
+        }
+        /* this.count = parseInt(sys.localStorage.getItem('count'));
         for(let i =0; i< this.count; i++){
             let blocknumber = parseInt(sys.localStorage.getItem('dataUser'+ i));
             Map.notice1.ax.push(blocknumber);
-        }
+        } */
     }
  
     
