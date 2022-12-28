@@ -20,6 +20,8 @@ export class MainGame extends Component {
     btnTest : Button = null;
     @property(Button)
     btnExit2 : Button = null;
+    @property(Button)
+    btnClose : Button = null;
     @property(Label)
     lbX : Label = null;
     @property(Label)
@@ -32,6 +34,8 @@ export class MainGame extends Component {
     noderesult: Node = null;
     @property(Node)
     noticeDialog: Node = null;
+    @property(Node)
+    setFlagDialog: Node = null;
     @property(Label)
     result : Label = null;
     @property(Label)
@@ -50,6 +54,7 @@ export class MainGame extends Component {
     testX : Number = 0;
     testY : Number = 0;
     count : number = 0;
+    idflag : Number = 0;
 
     gameStage: Number = 0; // 0: , 1: started, 2: gameover
 
@@ -58,6 +63,7 @@ export class MainGame extends Component {
         [0, 0, 2]
     ];
     alist = {};
+    // finalax = Map.notice1.ax[Map.notice1.ax.length -1];
 
     public static notice : MainGame = null;
     static MainGame: Sprite;
@@ -65,15 +71,6 @@ export class MainGame extends Component {
     onDialogConfirm() {
         if (this.gameStage !== 1) return;
         this.noticeDialog.active = true;
-        // this.noticeDialog.active = true;
-        // this.note.enabled = true;                    
-        // this.exit.enabled = true;
-        // this.nodebtn1.active = true;
-        // this.nodebtn2.active = true;
-        // this.lbX.enabled = true;
-        // this.lbY.enabled = true;
-        // this.block.enabled = true;
-
     }
     offDialogConfirm(){
         this.noticeDialog.active = false;
@@ -96,10 +93,12 @@ export class MainGame extends Component {
         this.btnComfirm.node.on(Button.EventType.CLICK, this.onbtnCom, this);
         this.btnTest.node.on(Button.EventType.CLICK, this.onbtnTest, this);
         this.btnExit2.node.on(Button.EventType.CLICK, this.onbtnExit2, this);
+        this.btnClose.node.on(Button.EventType.CLICK, this.onbtnClose, this);
 
     }
     start() {
         this.noticeDialog.active = false;
+        this.setFlagDialog.active = false;
         this.loadData();
         console.log("ax", Map.notice1.ax);
 
@@ -168,6 +167,12 @@ export class MainGame extends Component {
     }
     onbtnCom(button: Button){
         // console.log("eventPrefab----", Map.notice1.aa);
+        Map.notice1.ax.push(this.idflag);
+        this.saveData();
+        console.log("ax", Map.notice1.ax);
+
+
+
 
 
         // let node = instantiate(Map.notice1.spawmflag);
@@ -182,7 +187,7 @@ export class MainGame extends Component {
         Map.notice1.countflag = Map.notice1.countflag + 1;
         
         // Map.notice1.setFlag.active = true;
-        console.log(Map.notice1.countflag);
+        // console.log(Map.notice1.countflag);
         
         
 
@@ -209,7 +214,7 @@ export class MainGame extends Component {
         // this.nodebtn2.active = false;
         // this.lbX.enabled = false;
         // this.lbY.enabled = false;
-        Map.notice1.setFlag.setPosition(0,0);
+        // Map.notice1.setFlag.setPosition(0,0);
         this.result.enabled = true;
         this.result.string = this.lbX.string + this.lbY.string;
         this.blockScreen.enabled = false;
@@ -233,14 +238,18 @@ export class MainGame extends Component {
             this.lbRs.string = 'You Lost !';
         }
         sys.localStorage.clear();
-        
-        
-
 
     }
     onbtnExit2(button: Button) {
         this.noderesult.active = false;
         this.blockScreen.enabled = false;
+
+        // Map.notice1.ax.splice(Map.notice1.ax[Map.notice1.ax[Map.notice1.ax.length -1]],1);
+    }
+    onbtnClose(button : Button){
+        this.setFlagDialog.active = false;
+        this.blockScreen.enabled = false;
+
     }
     getRNDInter(min = 65, max = 90) {
         return Math.floor(Math.random() * (max - min + 1)) + min;

@@ -35,6 +35,7 @@ export class Map extends Component {
     mapW: Number = 3060 - 490 ;
 
     ax = [];
+    finalax = this.ax[this.ax.length -1];
 
     aa = [
         // [1, 1, 1],

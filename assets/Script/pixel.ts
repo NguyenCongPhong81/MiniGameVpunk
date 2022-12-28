@@ -67,9 +67,8 @@ export  class eventPrefab extends Component {
     }
     onTouchEnd(event: EventTouch){
         const location1 = event.getLocation();
-        Map.notice1.ax.push(this.id);
-        MainGame.notice.saveData();
-       
+        
+        
         
         
         if((location1.x - this.pos.x ) < 10 && (location1.x - this.pos.x) > -10 && (location1.y - this.pos.y ) < 10 && (location1.y - this.pos.y) > -10 ){      
@@ -80,6 +79,8 @@ export  class eventPrefab extends Component {
             // node.setPosition(this.idx, this.idy);
             this.setFlagX = this.node.getPosition().x;
             this.setFlagY = this.node.getPosition().y;
+            MainGame.notice.idflag = this.id;
+            // MainGame.notice.saveData();
             // Map.notice1.setFlagA(this.node.getPosition().x, this.node.getPosition().y);
             // Map.notice1.setFlag.setParent(this.node);
             // Map.notice1.spawmflag.setParent(this.node);
@@ -87,6 +88,13 @@ export  class eventPrefab extends Component {
             MainGame.notice.blockScreen.enabled = true;
             MainGame.notice.noticeDialog.active = true;
             // this.spawmflag.enabled = true;
+            if(this.idx === 0 && this.idy === 0){
+                MainGame.notice.setFlagDialog.active = true;
+                MainGame.notice.noticeDialog.active = false;
+                MainGame.notice.blockScreen.enabled = true;
+
+
+            }
             
             
             
@@ -132,7 +140,6 @@ export  class eventPrefab extends Component {
             // set frame (1 -> 4)
             const id = Math.floor(Math.random() * 4) + 1;
             this.setFlag(id);
-            // console.log(Map.notice1.aa);
 
         }
     }
