@@ -21,9 +21,8 @@ export class Map extends Component {
     
 
     public static notice1: Map = null;
+
     
-
-
     x : Number = 0;
     y : Number = 0;
     countflag : number = 0;
@@ -38,9 +37,8 @@ export class Map extends Component {
     finalax = this.ax[this.ax.length -1];
 
     aa = [
-        // [1, 1, 1],
-        // [1, 1, 1],
-    ]; // 25 c, 34 h
+        
+    ]; 
 
     onLoad() {
         Map.notice1 = this;
@@ -58,16 +56,8 @@ export class Map extends Component {
 
     start() {   
 
-        let id1 = -1;
+        let idBlock = -1;
         let setx = 0;
-        // console.log(sys.localStorage.getItem('dataUser'));
-
-        
-       
-        
-
-
-
         MainGame.notice.gameStage = 0;
         
         let ix = 0;
@@ -84,12 +74,12 @@ export class Map extends Component {
                 // this.setFlag2.setParent(node);             
                 // this.setFlag3.setParent(node);             
                 node.setPosition(i,-j); 
-                id1++;
+                idBlock++;
                 sety++;
                 let Pixel = node.getComponent(eventPrefab);
-                Pixel.id = id1;
-                Pixel.idx = i;
-                Pixel.idy = -j;
+                Pixel.id = idBlock;
+                Pixel.posX = i;
+                Pixel.posY= -j;
                 Pixel.setX = setx;
                 Pixel.setY = sety;
                 
@@ -97,21 +87,13 @@ export class Map extends Component {
                 // console.log(id1);
                 // console.log("xy", id1, setx, sety);
                 for(let i = 0; i < Map.notice1.ax.length; i++){
-                    if(Map.notice1.ax[i] === id1){
-                       this.setFlagA(eventPrefab.idselect.idx,eventPrefab.idselect.idy);
+                    if(Map.notice1.ax[i] === idBlock){
+                       this.setFlagA(eventPrefab.idselect.posX,eventPrefab.idselect.posY);
                     }
                 }                                                                   
             }
-            ix ++;
-
-            
-           
+            ix ++;       
         }
-        
-       
-        
-       
-   
     }
 
     update(deltaTime: number) {

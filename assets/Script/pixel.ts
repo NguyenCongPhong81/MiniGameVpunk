@@ -9,20 +9,14 @@ export  class eventPrefab extends Component {
 
     pos : Vec2 = new Vec2();
     id : Number = -1;
-    idx : number = 0;
-    idy : number = 0;
+    posX : number = 0;
+    posY : number = 0;
     type : Number = 0;
     setX : number = 0;
     setY : number = 0;
 
     setFlagX: number = 0;
     setFlagY: number = 0;
-
-    
-    
-    
-    
-    
     public static idselect : eventPrefab = null;
     static eventPrefab: Sprite;
 
@@ -35,8 +29,6 @@ export  class eventPrefab extends Component {
     }
 
     start() {
-        // this.spawmflag.enabled = false;
-        // console.log(sys.localStorage.getItem('dataUser'));
         
         
     }
@@ -52,7 +44,7 @@ export  class eventPrefab extends Component {
         // this.spawmflag.enabled = flag;
         let node = instantiate(Map.notice1.spawmflag);
         node.parent = this.node.parent;
-        node.setPosition(this.idx, this.idy);
+        node.setPosition(this.posX, this. posY);
         node.active = flag;
     }
     
@@ -88,7 +80,7 @@ export  class eventPrefab extends Component {
             MainGame.notice.blockScreen.enabled = true;
             MainGame.notice.noticeDialog.active = true;
             // this.spawmflag.enabled = true;
-            if(this.idx === 0 && this.idy === 0){
+            if(this.posX === 0 && this.posY === 0){
                 MainGame.notice.setFlagDialog.active = true;
                 MainGame.notice.noticeDialog.active = false;
                 MainGame.notice.blockScreen.enabled = true;
@@ -133,13 +125,13 @@ export  class eventPrefab extends Component {
             MainGame.notice.lbY.string = this.setX.toString();
             let char1 = String.fromCharCode(this.setY);
             MainGame.notice.lbX.string = char1.toString();        
-            Map.notice1.setFlagX =  this.idx;
-            Map.notice1.setFlagY =  this.idy;
+            Map.notice1.setFlagX =  this.posX;
+            Map.notice1.setFlagY =  this.posY;
             // this.spawmflag.enabled = true;
             
             // set frame (1 -> 4)
-            const id = Math.floor(Math.random() * 4) + 1;
-            this.setFlag(id);
+            // const id = Math.floor(Math.random() * 4) + 1;
+            // this.setFlag(id);
 
         }
     }

@@ -63,7 +63,6 @@ export class MainGame extends Component {
         [0, 0, 2]
     ];
     alist = {};
-    // finalax = Map.notice1.ax[Map.notice1.ax.length -1];
 
     public static notice : MainGame = null;
     static MainGame: Sprite;
@@ -101,14 +100,6 @@ export class MainGame extends Component {
         this.setFlagDialog.active = false;
         this.loadData();
         console.log("ax", Map.notice1.ax);
-
-        
-        // this.note.enabled = false;
-        // this.exit.enabled = false;
-        // this.nodebtn1.active = false;
-        // this.nodebtn2.active = false;
-        // this.lbX.enabled = false;
-        // this.lbY.enabled = false;
         this.result.enabled = false;
         this.offSetFlag();
         this.noderesult.active = false;
@@ -126,20 +117,9 @@ export class MainGame extends Component {
     onClick(button: Button){
         this.noticeDialog.active = false;
         this.offSetFlag();
-
-        // this.note.enabled = false;
-        // this.exitDialog.enabled = false;
-        // this.nodebtn1.active = false;
-        // this.nodebtn2.active = false;
-        // this.lbX.enabled = false;
-        // this.lbY.enabled = false;
-        // Map.notice1.setFlag.active = false;
-        // Map.notice1.setFlag1.active = false;           
-        // Map.notice1.setFlag2.active = false;           
-        // Map.notice1.setFlag3.active = false; 
         this.blockScreen.enabled = false;
         Map.notice1.countflag = 0;
-        // eventPrefab.idselect.spawmflag.enabled = false;
+        
 
 
 
@@ -147,50 +127,22 @@ export class MainGame extends Component {
     onbtnExit(button: Button){
         this.noticeDialog.active = false;
         this.offSetFlag();
-        // this.note.enabled = false;
-        // this.exitDialog.enabled = false;
-        // this.nodebtn1.active = false;
-        // this.nodebtn2.active = false;
-        // this.lbX.enabled = false;
-        // this.lbY.enabled = false;
-        // Map.notice1.setFlag.active = false;
-        // Map.notice1.setFlag1.active = false;           
-        // Map.notice1.setFlag2.active = false;           
-        // Map.notice1.setFlag3.active = false; 
         this.blockScreen.enabled = false;
         Map.notice1.countflag = 0;
         eventPrefab.idselect.setFlag2(false);      
 
-        // eventPrefab.idselect.spawmflag.enabled = false;
 
         
     }
-    onbtnCom(button: Button){
-        // console.log("eventPrefab----", Map.notice1.aa);
+    onbtnCom(button: Button){       
         Map.notice1.ax.push(this.idflag);
         this.saveData();
         console.log("ax", Map.notice1.ax);
-
-
-
-
-
-        // let node = instantiate(Map.notice1.spawmflag);
-        // node.parent = this.node.parent;
-        // eventPrefab.idselect.node.setPosition(0,0);
-
         Map.notice1.setFlagA(Map.notice1.setFlagX,Map.notice1.setFlagY);
-
-        // eventPrefab.idselect.setFlag2(true);      
-    
-        // Map.notice1.aa[0][0].spawmflag.enabled = true;
         Map.notice1.countflag = Map.notice1.countflag + 1;
         
         // Map.notice1.setFlag.active = true;
         // console.log(Map.notice1.countflag);
-        
-        
-
         // if(Map.notice1.countflag === 1){
         //     Map.notice1.setFlag.active = true;
         // }else if(Map.notice1.countflag === 2){
