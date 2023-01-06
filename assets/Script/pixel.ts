@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Button, input, Input, EventMouse, Prefab, EventTouch, Vec2, Vec3, Sprite, instantiate, sys } from 'cc';
+import { _decorator, Component, Node, Button, input, Input, EventMouse, Prefab, EventTouch, Vec2, Vec3, Sprite, instantiate, sys, geometry, PhysicsSystem } from 'cc';
 import { MainGame } from './MainGame';
 import { Map } from './Map';
 const { ccclass, property } = _decorator;
@@ -80,14 +80,20 @@ export  class eventPrefab extends Component {
             MainGame.notice.blockScreen.enabled = true;
             MainGame.notice.noticeDialog.active = true;
             // this.spawmflag.enabled = true;
+            // console.log("id", this.id);
             if(this.posX === 0 && this.posY === 0){
-                MainGame.notice.setFlagDialog.active = true;
+                alert("This position has been selected!");
+                // MainGame.notice.setFlagDialog.active = true;
                 MainGame.notice.noticeDialog.active = false;
-                MainGame.notice.blockScreen.enabled = true;
+                MainGame.notice.blockScreen.enabled = false;
 
 
             }
             
+            const ray = new geometry.Ray();
+            // const flagEvent = PhysicsSystem.instance.raycast(this.node.getPosition().x,this.node.getPosition().y,ray);
+
+            // console.log("ray", ray);
             
             
 
@@ -127,13 +133,8 @@ export  class eventPrefab extends Component {
             MainGame.notice.lbX.string = char1.toString();        
             Map.notice1.setFlagX =  this.posX;
             Map.notice1.setFlagY =  this.posY;
-            // this.spawmflag.enabled = true;
-            
-            // set frame (1 -> 4)
-            // const id = Math.floor(Math.random() * 4) + 1;
-            // this.setFlag(id);
-
         }
+
     }
     
 }

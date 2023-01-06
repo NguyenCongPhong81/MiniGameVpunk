@@ -69,10 +69,7 @@ export class Map extends Component {
             for(let j = 145; j < this.mapH; j+= 90){
                 let node = instantiate(this.block);
                 node.parent = this.node.parent;
-                this.setFlag.setParent(node);             
-                // this.setFlag1.setParent(node);           
-                // this.setFlag2.setParent(node);             
-                // this.setFlag3.setParent(node);             
+                this.setFlag.setParent(node);                         
                 node.setPosition(i,-j); 
                 idBlock++;
                 sety++;
@@ -84,8 +81,6 @@ export class Map extends Component {
                 Pixel.setY = sety;
                 
                 this.aa[ix].push(node);
-                // console.log(id1);
-                // console.log("xy", id1, setx, sety);
                 for(let i = 0; i < Map.notice1.ax.length; i++){
                     if(Map.notice1.ax[i] === idBlock){
                        this.setFlagA(eventPrefab.idselect.posX,eventPrefab.idselect.posY);

@@ -4,8 +4,7 @@ import { eventPrefab } from './pixel';
 import { Map } from './Map';
 
 @ccclass('MainGame')
-export class MainGame extends Component {
-    
+export class MainGame extends Component { 
     @property(Sprite)
     note : Sprite = null;
     @property(Sprite)
@@ -20,8 +19,6 @@ export class MainGame extends Component {
     btnTest : Button = null;
     @property(Button)
     btnExit2 : Button = null;
-    @property(Button)
-    btnClose : Button = null;
     @property(Label)
     lbX : Label = null;
     @property(Label)
@@ -34,14 +31,16 @@ export class MainGame extends Component {
     noderesult: Node = null;
     @property(Node)
     noticeDialog: Node = null;
-    @property(Node)
-    setFlagDialog: Node = null;
     @property(Label)
     result : Label = null;
     @property(Label)
     resultX : Label = null;
     @property(Label)
     resultY : Label = null;
+    @property(Label)
+    totalUser : Label = null;
+    @property(Label)
+    timeSecond : Label = null;
     @property(Label)
     lbAdm : Label = null;
     @property(Label)
@@ -53,10 +52,10 @@ export class MainGame extends Component {
 
     testX : Number = 0;
     testY : Number = 0;
-    count : number = 0;
     idflag : Number = 0;
-
+    countUser : number = 0;
     gameStage: Number = 0; // 0: , 1: started, 2: gameover
+    second = 0;
 
     aa = [
         [0, 0, 1],
@@ -92,12 +91,14 @@ export class MainGame extends Component {
         this.btnComfirm.node.on(Button.EventType.CLICK, this.onbtnCom, this);
         this.btnTest.node.on(Button.EventType.CLICK, this.onbtnTest, this);
         this.btnExit2.node.on(Button.EventType.CLICK, this.onbtnExit2, this);
-        this.btnClose.node.on(Button.EventType.CLICK, this.onbtnClose, this);
+       
 
     }
     start() {
+        
+
+
         this.noticeDialog.active = false;
-        this.setFlagDialog.active = false;
         this.loadData();
         console.log("ax", Map.notice1.ax);
         this.result.enabled = false;
@@ -105,14 +106,22 @@ export class MainGame extends Component {
         this.noderesult.active = false;
         this.blockScreen.enabled = false;
         this.gameStage = 1;
-        Map.notice1.initMap(this.aa);
-        
-        
+        Map.notice1.initMap(this.aa);  
 
     }
 
     update(deltaTime: number) {
+        // for(let i = 0; i< 300; i--){
+        //     this.timeSecond.string = i.toString();
+        // }
+
+        // let time = setInterval(this.timeGame,1000);
         
+
+        let d = new Date();
+        let t = d.getSeconds();
+        this.timeSecond.string = t.toString();
+        // console.log(t);
     }
     onClick(button: Button){
         this.noticeDialog.active = false;
@@ -140,26 +149,7 @@ export class MainGame extends Component {
         console.log("ax", Map.notice1.ax);
         Map.notice1.setFlagA(Map.notice1.setFlagX,Map.notice1.setFlagY);
         Map.notice1.countflag = Map.notice1.countflag + 1;
-        
-        // Map.notice1.setFlag.active = true;
-        // console.log(Map.notice1.countflag);
-        // if(Map.notice1.countflag === 1){
-        //     Map.notice1.setFlag.active = true;
-        // }else if(Map.notice1.countflag === 2){
-        //     Map.notice1.setFlag.active = true;
-        //     Map.notice1.setFlag1.active = true;
-        // }else if(Map.notice1.countflag === 3){
-        //     Map.notice1.setFlag.active = true;
-        //     Map.notice1.setFlag1.active = true;
-        //     Map.notice1.setFlag2.active = true;
-        // }else{
-        //     Map.notice1.setFlag.active = true;
-        //     Map.notice1.setFlag1.active = true;
-        //     Map.notice1.setFlag2.active = true;
-        //     Map.notice1.setFlag3.active = true;
-        // }
-        this.noticeDialog.active = false;
-        
+        this.noticeDialog.active = false; 
         // this.note.enabled = false;
         // this.exitDialog.enabled = false;
         // this.nodebtn1.active = false;
@@ -175,6 +165,7 @@ export class MainGame extends Component {
         
     }
     onbtnTest(button: Button) {
+        Map.notice1.countflag = 0;
         this.gameStage = 2;
         this.blockScreen.enabled = true;
         this.resultY.string = (Math.floor(Math.random() * 34) + 1).toString();
@@ -184,12 +175,13 @@ export class MainGame extends Component {
         // this.resultX.string = 'A';
         this.noderesult.active = true;
         if(this.lbX.string === this.resultX.string && this.lbY.string === this.resultY.string){
-            this.lbRs.string = 'You Win !';
+            this.lbRs.string = 'You Win!';
         }
         else{
-            this.lbRs.string = 'You Lost !';
+            this.lbRs.string = 'You Lost!';
         }
         sys.localStorage.clear();
+        
 
     }
     onbtnExit2(button: Button) {
@@ -199,7 +191,6 @@ export class MainGame extends Component {
         // Map.notice1.ax.splice(Map.notice1.ax[Map.notice1.ax[Map.notice1.ax.length -1]],1);
     }
     onbtnClose(button : Button){
-        this.setFlagDialog.active = false;
         this.blockScreen.enabled = false;
 
     }
@@ -219,18 +210,25 @@ export class MainGame extends Component {
         const text = sys.localStorage.getItem('dataUser');
         if (text) {
             const arr = text.split(",");
+            this.countUser = arr.length;
             console.log("arr---", arr);
             for(let i =0; i< arr.length; i++) {
                 Map.notice1.ax.push(parseInt(arr[i]));
             }
         }
+        this.totalUser.string = this.countUser.toString();
         /* this.count = parseInt(sys.localStorage.getItem('count'));
         for(let i =0; i< this.count; i++){
             let blocknumber = parseInt(sys.localStorage.getItem('dataUser'+ i));
             Map.notice1.ax.push(blocknumber);
         } */
     }
- 
+    timeGame(){  
+        let second = 0;
+        return second;
+    }
+    
+
     
     
 }
