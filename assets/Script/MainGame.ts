@@ -55,7 +55,7 @@ export class MainGame extends Component {
     idflag : Number = 0;
     countUser : number = 0;
     gameStage: Number = 0; // 0: , 1: started, 2: gameover
-    second = 0;
+    second = 300;
 
     aa = [
         [0, 0, 1],
@@ -95,9 +95,6 @@ export class MainGame extends Component {
 
     }
     start() {
-        
-
-
         this.noticeDialog.active = false;
         this.loadData();
         console.log("ax", Map.notice1.ax);
@@ -107,7 +104,16 @@ export class MainGame extends Component {
         this.blockScreen.enabled = false;
         this.gameStage = 1;
         Map.notice1.initMap(this.aa);  
+        
+        let Interval = 1;
+        let repeat = 1;
+        let delay = 0;
 
+        this.schedule(function(){
+            this.timeGame();
+        }, Interval,repeat,delay);
+        this.timeSecond.string = this.second.toString();
+       
     }
 
     update(deltaTime: number) {
@@ -120,8 +126,11 @@ export class MainGame extends Component {
 
         let d = new Date();
         let t = d.getSeconds();
-        this.timeSecond.string = t.toString();
+        // this.timeSecond.string = t.toString();
         // console.log(t);
+
+
+        
     }
     onClick(button: Button){
         this.noticeDialog.active = false;
@@ -224,8 +233,10 @@ export class MainGame extends Component {
         } */
     }
     timeGame(){  
-        let second = 0;
-        return second;
+        this.second =  this.second - 1;
+        if(this.second === 0){
+            this.second = 300;
+        }
     }
     
 
