@@ -7,16 +7,18 @@ const { ccclass, property } = _decorator;
 export  class eventPrefab extends Component {
     
 
-    pos : Vec2 = new Vec2();
-    id : Number = -1;
-    posX : number = 0;
-    posY : number = 0;
-    type : Number = 0;
-    setX : number = 0;
-    setY : number = 0;
+    private pos : Vec2 = new Vec2();
+    private setFlagPosX: number = 0;
+    private setFlagPosY: number = 0;
 
-    setFlagX: number = 0;
-    setFlagY: number = 0;
+
+    public id : Number = -1;
+    public posX : number = 0;
+    public posY : number = 0;
+    public setX : number = 0;
+    public setY : number = 0;
+
+    
     public static idselect : eventPrefab = null;
     static eventPrefab: Sprite;
 
@@ -32,24 +34,6 @@ export  class eventPrefab extends Component {
         
         
     }
-
-    setFlag(flag: number) {
-        
-        // set frame cho spawmflag
-
-        
-
-    }
-    setFlag2(flag: boolean) {
-        // this.spawmflag.enabled = flag;
-        let node = instantiate(Map.notice1.spawmflag);
-        node.parent = this.node.parent;
-        node.setPosition(this.posX, this. posY);
-        node.active = flag;
-    }
-    
-
-    
     update(deltaTime: number) {
     
     }
@@ -61,72 +45,20 @@ export  class eventPrefab extends Component {
         const location1 = event.getLocation();
         
         
-        
-        
         if((location1.x - this.pos.x ) < 10 && (location1.x - this.pos.x) > -10 && (location1.y - this.pos.y ) < 10 && (location1.y - this.pos.y) > -10 ){      
-            // MainGame.notice.onDialogConfirm();
-            // this.setFlag2(true);
-            // let node = instantiate(Map.notice1.spawmflag);
-            // node.parent = this.node.parent;
-            // node.setPosition(this.idx, this.idy);
-            this.setFlagX = this.node.getPosition().x;
-            this.setFlagY = this.node.getPosition().y;
+            this. setFlagPosX = this.node.getPosition().x;
+            this. setFlagPosY = this.node.getPosition().y;
             MainGame.notice.idflag = this.id;
-            // MainGame.notice.saveData();
-            // Map.notice1.setFlagA(this.node.getPosition().x, this.node.getPosition().y);
-            // Map.notice1.setFlag.setParent(this.node);
-            // Map.notice1.spawmflag.setParent(this.node);
             MainGame.notice.gameStage = 1;
             MainGame.notice.blockScreen.enabled = true;
             MainGame.notice.noticeDialog.active = true;
-            // this.spawmflag.enabled = true;
-            // console.log("id", this.id);
             if(this.posX === 0 && this.posY === 0){
                 alert("This position has been selected!");
-                // MainGame.notice.setFlagDialog.active = true;
                 MainGame.notice.noticeDialog.active = false;
                 MainGame.notice.blockScreen.enabled = false;
 
 
             }
-            
-            const ray = new geometry.Ray();
-            // const flagEvent = PhysicsSystem.instance.raycast(this.node.getPosition().x,this.node.getPosition().y,ray);
-
-            // console.log("ray", ray);
-            
-            
-
-            // MainGame.notice.note.enabled = true;                    
-            // MainGame.notice.exitDialog.enabled = true;
-            // MainGame.notice.nodebtn1.active = true;
-            // MainGame.notice.nodebtn2.active = true;
-            // MainGame.notice.lbX.enabled = true;
-            // MainGame.notice.lbY.enabled = true;
-            
-            // Map.notice1.setFlag.active = false;           
-            // Map.notice1.setFlag1.active = false;           
-            // Map.notice1.setFlag2.active = false;           
-            // Map.notice1.setFlag3.active = false;           
-            
-
-
-            // if(Map.notice1.countflag === 1){
-            //     Map.notice1.setFlag.setParent(this.node);
-            // }
-            // else if(Map.notice1.countflag === 2){
-            //     Map.notice1.setFlag1.setParent(this.node);
-            // }else if(Map.notice1.countflag === 3){
-            //     Map.notice1.setFlag2.setParent(this.node);
-            // }else if(Map.notice1.countflag === 4){
-            //     Map.notice1.setFlag3.setParent(this.node);
-            // }
-            // if(Map.notice1.countflag >= 4){
-            //     Map.notice1.countflag = 0;
-            // }
-            
-            // console.log(Map.notice1.countflag);
-
 
             MainGame.notice.lbY.string = this.setX.toString();
             let char1 = String.fromCharCode(this.setY);

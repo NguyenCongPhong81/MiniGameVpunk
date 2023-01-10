@@ -7,34 +7,30 @@ const { ccclass, property } = _decorator;
 export class Map extends Component {
     
     @property(Prefab)
-    block : Prefab = null;
+    public block : Prefab = null;
     @property(Prefab)
-    spawmflag : Prefab = null;
+    public spawmflag : Prefab = null;
     @property(Node)
-    setFlag : Node = null;
+    public setFlag : Node = null;
     @property(Node)
-    setFlag1 : Node = null;
+    public setFlag1 : Node = null;
     @property(Node)
-    setFlag2 : Node = null;
+    public setFlag2 : Node = null;
     @property(Node)
-    setFlag3 : Node = null;
+    public setFlag3 : Node = null;
     
+    private mapH : Number = 2340 + 145 ;
+    private mapW: Number = 3060 - 490 ;
+
+
 
     public static notice1: Map = null;
-
+    public setFlagX : number = 0; 
+    public setFlagY : number = 0;
     
-    x : Number = 0;
-    y : Number = 0;
-    countflag : number = 0;
     
-    setFlagX : number = 0; 
-    setFlagY : number = 0;
-    
-    mapH : Number = 2340 + 145 ;
-    mapW: Number = 3060 - 490 ;
 
     ax = [];
-    finalax = this.ax[this.ax.length -1];
 
     aa = [
         
@@ -95,7 +91,7 @@ export class Map extends Component {
         
     }
     setFlagA(x: number, y: number) {
-        // console.log("setFlagA", x, y);
+        
         let node = instantiate(this.spawmflag);
         node.setPosition(x, y);
         node.parent = this.node.parent; 

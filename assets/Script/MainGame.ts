@@ -6,56 +6,56 @@ import { Map } from './Map';
 @ccclass('MainGame')
 export class MainGame extends Component { 
     @property(Sprite)
-    note : Sprite = null;
+    public note : Sprite = null;
     @property(Sprite)
-    exitDialog : Sprite =  null;
+    public exitDialog : Sprite =  null;
     @property(Button)
-    btn : Button = null;
+    public btn : Button = null;
     @property(Button)
-    btnComfirm : Button = null;
+    public btnComfirm : Button = null;
     @property(Button)
-    btnExit : Button = null;
+    public btnExit : Button = null;
     @property(Button)
-    btnTest : Button = null;
+    public btnTest : Button = null;
     @property(Button)
-    btnExit2 : Button = null;
+    public btnExit2 : Button = null;
     @property(Label)
-    lbX : Label = null;
+    public lbX : Label = null;
     @property(Label)
-    lbY : Label = null;
+    public lbY : Label = null;
     @property(Node)
-    nodebtn1: Node = null;
+    public nodebtn1: Node = null;
     @property(Node)
-    nodebtn2: Node = null;
+    public nodebtn2: Node = null;
     @property(Node)
-    noderesult: Node = null;
+    public noderesult: Node = null;
     @property(Node)
-    noticeDialog: Node = null;
+    public noticeDialog: Node = null;
     @property(Label)
-    result : Label = null;
+    private result : Label = null;
     @property(Label)
-    resultX : Label = null;
+    private resultX : Label = null;
     @property(Label)
-    resultY : Label = null;
+    private resultY : Label = null;
     @property(Label)
-    totalUser : Label = null;
+    private totalUser : Label = null;
     @property(Label)
-    timeSecond : Label = null;
+    private timeSecond : Label = null;
     @property(Label)
-    lbAdm : Label = null;
+    private lbAdm : Label = null;
     @property(Label)
-    lbRs : Label = null;
+    private lbRs : Label = null;
     @property(BlockInputEvents)
-    blockScreen: BlockInputEvents =  null;
+    public blockScreen: BlockInputEvents =  null;
     
+
+    private  countUser : number = 0;
   
 
-    testX : Number = 0;
-    testY : Number = 0;
-    idflag : Number = 0;
-    countUser : number = 0;
-    gameStage: Number = 0; // 0: , 1: started, 2: gameover
-    second = 300;
+    
+    public idflag : Number = 0;
+    public gameStage: Number = 0; // 0: , 1: started, 2: gameover
+    public second = 300;
 
     aa = [
         [0, 0, 1],
@@ -105,67 +105,43 @@ export class MainGame extends Component {
         this.gameStage = 1;
         Map.notice1.initMap(this.aa);  
         
-        let Interval = 1;
-        let repeat = 1;
+        let interval = 1;
+        let repeat = 300;
         let delay = 0;
+        this.timeSecond.string = this.second.toString();
+
 
         this.schedule(function(){
             this.timeGame();
-        }, Interval,repeat,delay);
-        this.timeSecond.string = this.second.toString();
+            this.timeSecond.string = this.second.toString();
+        }, interval,repeat,delay);
+        
        
     }
 
     update(deltaTime: number) {
-        // for(let i = 0; i< 300; i--){
-        //     this.timeSecond.string = i.toString();
-        // }
-
-        // let time = setInterval(this.timeGame,1000);
-        
-
         let d = new Date();
         let t = d.getSeconds();
-        // this.timeSecond.string = t.toString();
-        // console.log(t);
-
-
-        
+  
     }
     onClick(button: Button){
         this.noticeDialog.active = false;
         this.offSetFlag();
         this.blockScreen.enabled = false;
-        Map.notice1.countflag = 0;
-        
-
-
 
     }
     onbtnExit(button: Button){
         this.noticeDialog.active = false;
         this.offSetFlag();
         this.blockScreen.enabled = false;
-        Map.notice1.countflag = 0;
-        eventPrefab.idselect.setFlag2(false);      
-
-
-        
+   
     }
     onbtnCom(button: Button){       
         Map.notice1.ax.push(this.idflag);
         this.saveData();
         console.log("ax", Map.notice1.ax);
         Map.notice1.setFlagA(Map.notice1.setFlagX,Map.notice1.setFlagY);
-        Map.notice1.countflag = Map.notice1.countflag + 1;
         this.noticeDialog.active = false; 
-        // this.note.enabled = false;
-        // this.exitDialog.enabled = false;
-        // this.nodebtn1.active = false;
-        // this.nodebtn2.active = false;
-        // this.lbX.enabled = false;
-        // this.lbY.enabled = false;
-        // Map.notice1.setFlag.setPosition(0,0);
         this.result.enabled = true;
         this.result.string = this.lbX.string + this.lbY.string;
         this.blockScreen.enabled = false;
@@ -174,7 +150,6 @@ export class MainGame extends Component {
         
     }
     onbtnTest(button: Button) {
-        Map.notice1.countflag = 0;
         this.gameStage = 2;
         this.blockScreen.enabled = true;
         this.resultY.string = (Math.floor(Math.random() * 34) + 1).toString();
@@ -190,14 +165,14 @@ export class MainGame extends Component {
             this.lbRs.string = 'You Lost!';
         }
         sys.localStorage.clear();
+        this.second = 300;
+
         
 
     }
     onbtnExit2(button: Button) {
         this.noderesult.active = false;
         this.blockScreen.enabled = false;
-
-        // Map.notice1.ax.splice(Map.notice1.ax[Map.notice1.ax[Map.notice1.ax.length -1]],1);
     }
     onbtnClose(button : Button){
         this.blockScreen.enabled = false;
